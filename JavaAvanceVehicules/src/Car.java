@@ -2,9 +2,10 @@
 public class Car {
 	private final String brand;
 	private final long value;
+
+	private long vetuste;
 	
 	public Car(String brand, long value) {
-
 		this.brand = brand;
 		if (value > 0) {
 			this.value = value;
@@ -22,7 +23,7 @@ public class Car {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Brand : " + this.brand + "Value : " + this.value;
+		return "Brand : " + this.brand +" | " + "Value : " + this.value + "\n";
 	}
 	
 	
