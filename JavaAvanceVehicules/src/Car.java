@@ -1,15 +1,29 @@
 
-public class Car {
+public class Car implements Vehicule {
 	private final String brand;
 	private final long value;
+	private final Discount discount;
 
-	private long vetuste;
+	private final int vetuste;
 	
-	public Car(String brand, long value) {
+	public Car(String brand, long value, Discount d) {
+		if(value < 0) {
+			throw new IllegalArgumentException();
+		}		
 		this.brand = brand;
-		if (value > 0) {
-			this.value = value;
-		}else this.value = -1;
+		this.value = value;
+		this.discount = d;
+		vetuste = 0;
+	}
+	
+	public Car(String brand, long value, Discount d, int vetuste) {
+		if(value < 0) {
+			throw new IllegalArgumentException();
+		}		
+		this.brand = brand;
+		this.value = value;
+		this.discount = d;
+		this.vetuste = vetuste;
 	}
 
 	public String getBrand() {
@@ -17,7 +31,9 @@ public class Car {
 	}
 
 	public long getValue() {
-		return value;
+		if( this.discount!= null ) {
+			return discount.getValue();
+		}else return value - 1000 * vetuste;	
 	}
 
 	@Override
@@ -26,8 +42,7 @@ public class Car {
 		return "Brand : " + this.brand +" | " + "Value : " + this.value + "\n";
 	}
 	
-	
-	
-	
-
+	public boolean equals(Car c) {
+		return c.getBrand() == this.getBrand() && c.getValue() == this.getValue();
+	}
 }
